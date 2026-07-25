@@ -1,0 +1,333 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Maurice "Mo" Lichaa — design tokens
+   Direction: stadium poster. Warm cream paper, near-black ink,
+   one electric accent. Heavy condensed display + geometric sans.
+   Accent is a single variable — the whole site re-themes here.
+   ============================================================ */
+:root {
+  --ac: #862633;          /* Santa Clara red — primary accent */
+  --gold: #b3995d;        /* gold — decorative second accent (dots, rules) */
+  --gold-ink: #8a6f2e;    /* deeper gold, legible as small text on cream */
+  --ink: #17150f;         /* warm near-black */
+  --paper: #f4f1e9;       /* warm cream page */
+  --panel: #eae5d9;       /* deeper cream panel */
+  --body: #4a463c;        /* body copy */
+  --muted: #7d776a;       /* secondary labels */
+  --kicker: #948d7e;      /* uppercase kicker labels */
+  --line: #ded8c9;        /* hairlines */
+  --line-strong: #cbc4b0; /* stronger dividers */
+
+  --shell: 1440px;
+  --edge: 40px;           /* screen-edge gutter — nav sits flush to this */
+  --nav-h: 76px;
+
+  --ac-tint: color-mix(in srgb, var(--ac) 10%, var(--paper));
+  --ac-tint-border: color-mix(in srgb, var(--ac) 26%, var(--paper));
+}
+@media (max-width: 640px) {
+  :root { --edge: 20px; }
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+/* exactly the nav height: a full-screen section then lands flush under the
+   sticky bar and its bottom edge meets the bottom of the viewport */
+section[id] { scroll-margin-top: var(--nav-h); }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@layer base {
+  a { text-decoration: none; color: inherit; }
+}
+
+/* ---- Typography ---- */
+.display {
+  font-family: "Anton", Impact, "Haettenschweiler", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  line-height: 0.9;
+}
+
+.kicker {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--kicker);
+}
+
+/* a trailing period — the site's signature mark, in gold */
+.dot { color: var(--gold); }
+
+/* full-bleed to the screen edges (nav, hero) */
+.edge { padding-inline: var(--edge); }
+
+/* centred content column for the lower sections */
+.shell {
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--edge);
+}
+
+/* each wireframe box = one full screen. Height only — an unlayered
+   `display` here would override Tailwind's layout utilities. */
+.screen { min-height: calc(100svh - var(--nav-h)); }
+
+/* ============================================================
+   Hero talents — poster display words, alternating ink/red.
+   Roll up out of a mask on entrance, drift on a gentle stagger,
+   and pop up on hover. Colours are set per word in the JSX.
+   ============================================================ */
+.talent-float {
+  display: inline-block;
+  vertical-align: bottom;
+  animation: talentFloat 4.2s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.55s);
+}
+.talent-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.12em;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.talent-float:hover .talent-mask { transform: translateY(-10px) scale(1.06); }
+.talent { display: inline-block; }
+.js-reveal .talent { transform: translateY(110%); }
+.js-reveal .talent.in { transform: none; }
+@keyframes talentFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+
+/* ============================================================
+   Buttons — squared, confident, poster-like
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  border-radius: 2px;
+  padding: 18px 34px;
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease,
+    border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-fill {
+  color: var(--paper);
+  background: var(--ac);
+}
+.btn-fill:hover {
+  color: var(--paper);
+  background: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--ink) 26%, transparent);
+}
+
+.btn-outline {
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  padding: 16px 32px;
+  background: transparent;
+}
+.btn-outline:hover {
+  color: var(--paper);
+  background: var(--ink);
+  transform: translateY(-2px);
+}
+
+/* on the dark closing panel */
+.btn-outline-dark {
+  color: var(--paper);
+  border: 2px solid color-mix(in srgb, var(--paper) 40%, transparent);
+  padding: 13px 24px;
+  background: transparent;
+}
+.btn-outline-dark:hover {
+  color: var(--ink);
+  background: var(--paper);
+  border-color: var(--paper);
+  transform: translateY(-2px);
+}
+
+/* ---- nav link: accent wipe underline ---- */
+.navlink {
+  position: relative;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: color 0.18s ease;
+}
+.navlink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  height: 2px;
+  width: 100%;
+  background: var(--ac);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.navlink:hover { color: var(--ac); }
+.navlink:hover::after { transform: scaleX(1); }
+
+/* ---- accent chip + landing glow ---- */
+.chip {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ac);
+  background: var(--ac-tint);
+  border: 1px solid var(--ac-tint-border);
+  border-radius: 2px;
+  padding: 8px 13px;
+}
+.js-reveal .chip-glow { transform: translateX(-14px); }
+.js-reveal .chip-glow.in { transform: none; animation: chipGlow 1s ease-out 0.15s both; }
+@keyframes chipGlow {
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ac) 40%, transparent); }
+  55%  { box-shadow: 0 0 16px 3px color-mix(in srgb, var(--ac) 26%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ac) 0%, transparent); }
+}
+
+/* ============================================================
+   Scrolling logo band. N identical groups tile the track and it
+   slides exactly ONE group width per cycle, so the loop is seamless.
+
+   N matters: the track must still cover the screen at the moment it
+   resets, which needs (N-1) × groupWidth >= viewport width. Two copies
+   only works if a single copy is already wider than the screen — ours
+   isn't, so the right side emptied out before the loop came round.
+   Four copies covers ~3× the group width (ultrawide included).
+   KEEP `--copies` AND THE GROUP COUNT IN TrustedBy.jsx IN SYNC.
+
+   Each group carries its own trailing gap as padding-right so the seam
+   spacing matches the internal spacing. Row height is fixed so logos
+   of different aspect ratios sit on a common baseline.
+   ============================================================ */
+.marquee { overflow: hidden; }
+.marquee-track {
+  --copies: 4;
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-group {
+  display: flex;
+  align-items: center;
+  gap: 72px;
+  padding-right: 72px;
+  margin: 0;
+  list-style: none;
+}
+.marquee-item {
+  display: flex;
+  align-items: center;
+  height: 56px;           /* the slot a logo occupies — tallest mark is 54px */
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+.marquee-item:hover { color: var(--ac); }
+/* travels exactly one group width per cycle whatever --copies is, so the
+   scroll speed stays the same if the copy count changes */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-100% / var(--copies))); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* ---- photo slot placeholder ---- */
+.photo-slot {
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+  background: linear-gradient(140deg, var(--panel), #ded9cc);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.photo-slot span {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a9a294;
+}
+
+/* ---- experience card ---- */
+.exp-card {
+  background: #fbfaf6;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.exp-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--ac);
+  box-shadow: 0 14px 30px rgba(23, 21, 15, 0.1);
+}
+
+/* ---- closing-section arrow links ---- */
+.arrow-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--paper) 22%, transparent);
+  color: var(--paper);
+  transition: color 0.2s ease, border-color 0.2s ease, padding 0.2s ease;
+}
+.arrow-link:hover { color: var(--ac); border-color: var(--ac); }
+.arrow-link .arrow { transition: transform 0.25s ease; flex-shrink: 0; }
+.arrow-link:hover .arrow { transform: translate(4px, -4px); }
+
+/* ============================================================
+   Scroll reveal
+   ============================================================ */
+.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.js-reveal .reveal.in { opacity: 1; transform: none; }
+
+/* Elements the flight-path plane flies BEHIND slide in but never fade — while
+   a fading cover is semi-transparent the z-10 path bleeds through it. Keeping
+   opacity at 1 (only the transform animates) means the line can never show. */
+.js-reveal .reveal.no-fade { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js-reveal .reveal { opacity: 1 !important; transform: none !important; transition: none; }
+  .js-reveal .chip-glow.in { animation: none; }
+  .talent-float { animation: none; }
+  .talent-float:hover .talent-mask { transform: none; }
+  .btn, .exp-card, .navlink::after, .arrow-link, .arrow-link .arrow { transition: none; }
+}

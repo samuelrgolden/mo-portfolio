@@ -1,0 +1,21 @@
+node_modules/
+dist/
+.DS_Store
+
+# --- working / source material (kept local, not part of the deployed site) ---
+# Only the compressed public/*.webp images are served; these root-level
+# originals, scans, and handoff files are compression inputs and stay off GitHub.
+/*.jpg
+/*.jpeg
+/*.JPG
+/*.JPEG
+/*.png
+/*.PNG
+/*.heic
+/*.HEIC
+/*.pdf
+/DSC*
+/IMG_*
+/Maurice*
+/noname
+/design_handoff_maurice_portfolio/

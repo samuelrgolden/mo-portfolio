@@ -1,0 +1,117 @@
+import PhotoSlot from "./PhotoSlot.jsx";
+
+/* Each object is one card. To add a photo, set `img` (and `alt`) —
+   the placeholder disappears automatically. */
+const ROLES = [
+  {
+    org: "San Francisco Giants",
+    role: "G-Team Entertainment Staff",
+    date: "Mar 2024 – Present",
+    desc: "On-camera activations, contests, and t-shirt tosses for crowds of 42,000+ at Oracle Park.",
+    img: "/exp-giants.webp",
+    alt: "Maurice hyping the crowd in Giants orange at Oracle Park",
+    ratio: "4 / 5",
+  },
+  {
+    org: "San Francisco 49ers",
+    role: "Entertainment Operations / Hype Team",
+    date: "Jul 2024 – Jan 2026",
+    desc: "Led sponsor activations and hype-team logistics at Levi's. Awarded Rookie of the Year (2024).",
+    img: "/exp-niners.webp",
+    alt: "Maurice waving a MAKE NOISE flag in 49ers Hype Team red at Levi's Stadium",
+    ratio: "4 / 5",
+  },
+  {
+    org: "Santa Clara University",
+    role: "Arena Host / Hypeman / DJ",
+    date: "Sep 2022 – Present",
+    desc: "Created the arena-host role at SCU, hosted 4,200+ crowds, and trained a five-person team.",
+    img: "/exp-santa-clara.webp",
+    alt: "Maurice working the court in a Santa Clara jersey",
+    ratio: "4 / 5",
+  },
+  {
+    org: "GALLO",
+    role: "Sales Leadership Development Intern",
+    date: "Jun 2025 – Aug 2025",
+    desc: "Full-time summer program in San Ramon learning the sales industry from a national brand.",
+    img: "/exp-gallo.webp",
+    alt: "Maurice with a glass of red wine in front of the illuminated GALLO sign",
+    ratio: "4 / 5",
+  },
+  {
+    org: "Stern Grove Festival",
+    role: "Perimeter Leader",
+    date: "Jun 2024 – Present",
+    desc: "Runs perimeter operations for the longest-running free music festival in the world with over 10,000 weekly attendees.",
+    img: "/exp-stern-grove.webp",
+    alt: "Maurice in a Stern Grove Festival perimeter vest looking out over the redwood grove",
+    ratio: "4 / 5",
+  },
+  {
+    org: "Santa Cruz Warriors",
+    role: "Arena Host",
+    date: "Nov 2025 – Apr 2026",
+    desc: "Ran on-court contests and promotions at the G-League level, under live pressure.",
+    img: "/exp-santa-cruz.webp",
+    alt: "Maurice on the NBA G League court with a mic",
+  },
+  {
+    org: "Gatsby Event Studios",
+    role: "Professional DJ / MC",
+    date: "Jun 2018 – Present",
+    desc: "DJ and emcee for hundreds of weddings, festivals, and private events.",
+    img: "/exp-gatsby.webp",
+    alt: "Maurice behind the decks at a Gatsby event",
+    ratio: "4 / 5",
+  },
+  {
+    org: "NCVF Championship",
+    role: "In-Game DJ",
+    date: "Apr 2026",
+    desc: "DJ'd the collegiate volleyball championship for ~9,000 attendees, plus the player afterparty.",
+    img: "/exp-ncvf.webp",
+    alt: "Maurice at the NCVF Collegiate Challenge DJ booth",
+  },
+];
+
+export default function Experience() {
+  return (
+    <section id="experience" className="screen border-t border-[var(--line)] bg-[var(--paper)] py-[72px] md:py-20">
+      <div className="shell w-full">
+        {/* opaque section-coloured panel (incl. the kicker) so the plane + line
+            vanish cleanly behind the title rather than showing around the glyphs */}
+        <div data-flight="exp-title" className="reveal no-fade relative z-[20] mb-8 bg-[var(--paper)] pb-2 pt-3 text-center">
+          <p className="kicker mb-3">Teams &amp; venues</p>
+          <h2 className="display m-0 leading-none text-[var(--ink)]" style={{ fontSize: "clamp(2.2rem,4vw,3.2rem)" }}>
+            Experience<span className="dot">.</span>
+          </h2>
+        </div>
+
+        {/* Collage, not a grid: CSS multi-column lets each card keep its own
+            height, so a 4:5 photo doesn't have to be sliced to 16:9. Cards
+            stagger naturally from the mixed aspects. `break-inside-avoid`
+            stops a card splitting across a column. */}
+        <div data-flight="exp-grid" className="columns-1 gap-5 sm:columns-2 lg:columns-4">
+          {ROLES.map((r, i) => (
+            <article key={r.org} className="reveal no-fade exp-card relative z-[20] mb-5 break-inside-avoid" style={{ transitionDelay: `${(i % 4) * 70}ms` }}>
+              <PhotoSlot
+                src={r.img}
+                alt={r.alt || r.org}
+                ratio={r.ratio || "16 / 9"}
+                rounded="0"
+                className="border-0 border-b border-[var(--line)]"
+              />
+              <div className="p-[18px]">
+                <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.06em] text-[var(--ac)]">{r.date}</p>
+                <h3 className="display m-0 mb-1 text-[21px] leading-[1.1] text-[var(--ink)]">{r.org}</h3>
+                <p className="mb-[10px] text-[12.5px] font-semibold text-[var(--muted)]">{r.role}</p>
+                <p className="m-0 text-[13px] leading-[1.55] text-[var(--body)]">{r.desc}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
