@@ -73,7 +73,7 @@ export default function Hero() {
             >
               Santa Clara marketing grad, starting in sales with Insight Global this August.
               Five years on mic and behind the decks for the Giants, the 49ers, and Santa Clara
-              Athletics — reading rooms of up to 65,000 people.
+              Athletics.
             </p>
           </div>
 
