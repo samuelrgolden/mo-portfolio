@@ -3,22 +3,23 @@ import TrustedBy from "./TrustedBy.jsx";
 
 const PARAGRAPHS = [
   "I'm a Santa Clara marketing grad who loves bringing energy to rooms, crowds, and teams. After five-plus years in live sports entertainment, I've been on mic, on camera, and behind the decks for audiences of up to 65,000.",
-  "My through-line is people. I built and trained a five-person hosting team at Santa Clara, I run an 8 person team at the longest running free music festival in the world, and I ran entertainment operations and a hype team for the 49ers while creating a free aviation career fair that drew 900+ attendees and 14 organizations.",
-  "This August I start my sales career with Insight Global in San Diego — while partnering as a DJ with Dancing Dj Productions to continue bringing the same thing that's worked on every floor and field I've been on: say yes, stay humble, follow through.",
-];
+  "My through-line is people. I built and trained a five-person hosting team at Santa Clara, I run an 8 person team at the longest running free music festival in the world, and I filled an inegral role in fan engagement with the 49ers while creating a free aviation career fair that drew 900+ attendees and 20+ organizations.",
+  "This August I start my sales career at Insight Global, and with my move to San Diego I've partnered with dancing dj productions to continue doing what I love, bringing energy to private events."]
 
 /* his mom's advice, quoted from his own LinkedIn post — stands unattributed */
 const QUOTE = {
   text: "Say yes. Show up early. Stay humble. Be yourself.",
 };
 
-/* these slide in and pulse an accent glow as they land */
+/* These slide in and pulse an accent glow as they land, then act as jump links.
+   `href` points at whichever section actually tells that chip's story — four of
+   the five are awards, so they land on Recognition rather than Experience. */
 const CHIPS = [
-  "65,000 crowds",
-  "Jim Jennings Award",
-  "Founded Aviation Exploration Day",
-  "49ers Rookie of the Year",
-  "Private Pilot",
+  { label: "Crowds of 65,000", href: "#experience" },
+  { label: "Jim Jennings Award", href: "#recognition" },
+  { label: "Founded Aviation Exploration Day", href: "#recognition" },
+  { label: "49ers Rookie of the Year", href: "#recognition" },
+  { label: "Private Pilot", href: "#recognition" },
 ];
 
 export default function About() {
@@ -48,7 +49,7 @@ export default function About() {
               className="reveal display m-0 mb-6 leading-none text-[var(--ink)]"
               style={{ fontSize: "clamp(2.4rem,5vw,4.4rem)" }}
             >
-              About<span className="dot">.</span>
+              About
             </h2>
 
             {PARAGRAPHS.map((p, i) => (
@@ -76,9 +77,14 @@ export default function About() {
 
             <div className="flex flex-wrap gap-[10px]">
               {CHIPS.map((c, i) => (
-                <span key={c} className="chip reveal chip-glow" style={{ transitionDelay: `${260 + i * 110}ms` }}>
-                  {c}
-                </span>
+                <a
+                  key={c.label}
+                  href={c.href}
+                  className="chip reveal chip-glow"
+                  style={{ transitionDelay: `${260 + i * 110}ms` }}
+                >
+                  {c.label}
+                </a>
               ))}
             </div>
           </div>

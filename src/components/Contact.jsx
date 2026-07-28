@@ -1,15 +1,16 @@
 import PhotoSlot from "./PhotoSlot.jsx";
 
 const EMAIL = "Itsdjwild@gmail.com";
-const DJSITE = "https://dancingdjproductions.com/about-us/dj-mo/";
+const INSTAGRAM = "https://www.instagram.com/mo.lichaa/";
 const LINKEDIN = "https://www.linkedin.com/in/maurice-mo-lichaa";
 
-/* The three ↗ rows. Swap any `href`/`label` — e.g. point the third at
-   Instagram once there's a handle to use. */
+/* The three ↗ rows. Swap any `href`/`label`. The Dancing DJ link that used to
+   sit third now lives on its own Experience card as a PORTFOLIO button, so this
+   row is Instagram instead. */
 const LINKS = [
   { label: "Email me", meta: EMAIL, href: `mailto:${EMAIL}` },
   { label: "Résumé", meta: "PDF, one page", href: "/maurice-lichaa-resume.pdf", external: true },
-  { label: "Dancing DJ Productions", meta: "DJ · MC · Host", href:DJSITE, external: true },
+  { label: "Instagram", meta: "@mo.lichaa", href: INSTAGRAM, external: true },
 ];
 
 function Arrow() {

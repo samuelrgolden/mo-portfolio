@@ -36,7 +36,7 @@ export default function TrustedBy() {
     /* relative z-30 keeps this band ABOVE the flight-path plane (z-25) so the
        Cessna flies *under* the logos as it passes through About. */
     <div className="relative z-30 border-t border-[var(--line)] bg-[var(--panel)] py-7">
-      <p className="kicker mb-5 text-center">On the mic &amp; on the field for</p>
+      <p className="kicker mb-5 text-center">Trusted by &amp; working with</p>
       {/* 4 identical groups: the track must still span the screen at the moment
           it loops, and one group is narrower than a desktop viewport.
           Must match `--copies` in .marquee-track. */}

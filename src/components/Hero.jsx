@@ -2,19 +2,21 @@ import PhotoSlot from "./PhotoSlot.jsx";
 
 /* The talents line. Edit each word's `color` here — use a design token
    (var(--ink) = black, var(--ac) = red, var(--gold) = gold, var(--gold-ink)
-   = deep gold) or any hex like "#862633". */
+   = deep gold) or any hex like "#862633".
+   `href` jumps to the section that actually carries the proof for that word —
+   Pilot's story is the licence card in Recognition, not an Experience role. */
 const TALENTS = [
-  { word: "Sales", color: "var(--ink)" }, // black
-  { word: "DJ", color: "var(--ac)" }, // red
-  { word: "Pilot", color: "var(--ink)" }, // black
-  { word: "Emcee", color: "var(--ac)" }, // red
+  { word: "Sales", color: "var(--ink)", href: "#experience" }, // black
+  { word: "DJ", color: "var(--ac)", href: "#experience" }, // red
+  { word: "Pilot", color: "var(--ink)", href: "#recognition" }, // black
+  { word: "Host", color: "var(--ac)", href: "#experience" }, // red
 ];
 
 /* the caption rows at the foot of the photo card */
 const CARD = [
   { label: "Based", value: "San Diego, CA" },
   { label: "Education", value: "BS Marketing, SCU '26" },
-  { label: "Currently", value: "Sales at Insight Global", accent: true },
+  { label: "Full-time", value: "Sales at Insight Global", accent: true },
 ];
 
 export default function Hero() {
@@ -43,7 +45,7 @@ export default function Hero() {
               className="reveal display m-0 whitespace-nowrap text-[var(--ink)]"
               style={{ fontSize: "clamp(2.4rem,9.5vw,11rem)" }}
             >
-              Mo <span className="text-[var(--ac)]">Lichaa.</span>
+              Mo <span className="text-[var(--ac)]">Lichaa</span>
             </h1>
 
             <p
@@ -53,7 +55,9 @@ export default function Hero() {
               {TALENTS.map((t, i) => (
                 <span key={t.word}>
                   {i > 0 && <span className="text-[var(--gold)]"> · </span>}
-                  <span className="talent-float" style={{ "--i": i }}>
+                  {/* the <a> IS the float wrapper — nesting one inside would give the
+                      link a static box while the word drifted away from it */}
+                  <a href={t.href} className="talent-float talent-link" style={{ "--i": i }}>
                     <span className="talent-mask">
                       <span
                         className="reveal talent"
@@ -62,7 +66,7 @@ export default function Hero() {
                         {t.word}
                       </span>
                     </span>
-                  </span>
+                  </a>
                 </span>
               ))}
             </p>
@@ -72,8 +76,8 @@ export default function Hero() {
               style={{ fontSize: "clamp(15px,1.35vw,19px)", transitionDelay: "820ms" }}
             >
               Santa Clara marketing grad, starting in sales with Insight Global this August.
-              Five years on mic and behind the decks for the Giants, the 49ers, and Santa Clara
-              Athletics.
+              Five years of fan engagement for the Giants, the 49ers, and Santa Clara
+              Athletics. Eight years hosting and behind the decks with Gatsby event studios, recently partnered with Dancing Dj Productions.
             </p>
           </div>
 

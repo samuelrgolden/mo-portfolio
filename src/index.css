@@ -90,11 +90,34 @@ body {
    and pop up on hover. Colours are set per word in the JSX.
    ============================================================ */
 .talent-float {
+  position: relative;
   display: inline-block;
   vertical-align: bottom;
   animation: talentFloat 4.2s ease-in-out infinite;
   animation-delay: calc(var(--i) * -0.55s);
 }
+
+/* Each talent is a jump link. A gold rule wipes in underneath, and since the
+   same hover lifts the mask, the word rises OFF the rule instead of towing it —
+   the lift stops reading as decoration and starts reading as an affordance.
+   The rule lives on the link, not inside .talent-mask, whose overflow:hidden
+   would clip it. Lengths in em so they track the clamp()ed word size. */
+.talent-link { cursor: pointer; }
+.talent-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.02em;
+  height: 0.05em;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.talent-link:hover::after,
+.talent-link:focus-visible::after { transform: scaleX(1); }
+.talent-link:focus-visible { outline: 2px solid var(--ac); outline-offset: 6px; }
 .talent-mask {
   display: inline-block;
   overflow: hidden;
@@ -201,12 +224,38 @@ body {
   padding: 8px 13px;
 }
 .js-reveal .chip-glow { transform: translateX(-14px); }
-.js-reveal .chip-glow.in { transform: none; animation: chipGlow 1s ease-out 0.15s both; }
+/* `backwards`, not `both`: a filled animation keeps applying its last keyframe
+   forever and outranks any normal declaration, so `both` left every chip pinned
+   to the 100% frame's zero box-shadow and the hover shadow below never showed.
+   0% and 100% are both zero here, so dropping the forwards fill changes nothing
+   about how the landing looks. */
+.js-reveal .chip-glow.in { transform: none; animation: chipGlow 1s ease-out 0.15s backwards; }
 @keyframes chipGlow {
   0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ac) 40%, transparent); }
   55%  { box-shadow: 0 0 16px 3px color-mix(in srgb, var(--ac) 26%, transparent); }
   100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ac) 0%, transparent); }
 }
+
+/* Chips are jump links to whichever section carries that credential. Lift + fill
+   on hover, matching .exp-card's language so the two read as the same gesture. */
+a.chip {
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+a.chip:hover,
+a.chip:focus-visible {
+  background: color-mix(in srgb, var(--ac) 17%, var(--paper));
+  border-color: var(--ac);
+  box-shadow: 0 6px 14px color-mix(in srgb, var(--ink) 16%, transparent);
+}
+/* Over-qualified on purpose: `.js-reveal .chip-glow.in` pins transform:none at
+   (0,3,0), which out-specifies a plain `a.chip:hover` and would eat the lift. */
+.js-reveal a.chip.in:hover,
+.js-reveal a.chip.in:focus-visible,
+a.chip:hover,
+a.chip:focus-visible { transform: translateY(-2px); }
+a.chip:focus-visible { outline: 2px solid var(--ac); outline-offset: 3px; }
 
 /* ============================================================
    Scrolling logo band. N identical groups tile the track and it
@@ -292,6 +341,40 @@ body {
   box-shadow: 0 14px 30px rgba(23, 21, 15, 0.1);
 }
 
+/* Org badge on an experience card. Height comes from --logo-h, set per card in
+   Experience.jsx, so this media query can shrink every badge in step with the
+   card type on phones — an inline `height` would out-rank it. */
+.exp-logo { height: var(--logo-h); }
+@media (max-width: 640px) {
+  .exp-logo { height: calc(var(--logo-h) * 0.72); }
+}
+
+/* ---- small outbound button inside an experience card ---- */
+.btn-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 6px 11px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ac);
+  background: var(--ac-tint);
+  border: 1px solid var(--ac-tint-border);
+  border-radius: 2px;
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease,
+    border-color 0.18s ease;
+}
+.btn-mini:hover {
+  color: var(--paper);
+  background: var(--ac);
+  border-color: var(--ac);
+  transform: translateY(-1px);
+}
+.btn-mini:focus-visible { outline: 2px solid var(--ac); outline-offset: 2px; }
+
 /* ---- closing-section arrow links ---- */
 .arrow-link {
   display: flex;
@@ -329,5 +412,10 @@ body {
   .js-reveal .chip-glow.in { animation: none; }
   .talent-float { animation: none; }
   .talent-float:hover .talent-mask { transform: none; }
-  .btn, .exp-card, .navlink::after, .arrow-link, .arrow-link .arrow { transition: none; }
+  /* travel goes, the state change stays — the gold rule and the chip fill still
+     appear on hover, they just snap instead of sliding. Without this a link
+     would have no feedback at all under reduced motion. */
+  .talent-link::after { transition: none; }
+  a.chip { transition: none; }
+  .btn, .btn-mini, .exp-card, .navlink::after, .arrow-link, .arrow-link .arrow { transition: none; }
 }
