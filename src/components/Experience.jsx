@@ -4,10 +4,12 @@ import PhotoSlot from "./PhotoSlot.jsx";
    the placeholder disappears automatically.
 
    `logo` is the org's mark, badged in the top-right of the card body opposite
-   the date. `logoH` is its height in px and is tuned PER LOGO on purpose — a
-   wide oval and a tall monogram set to the same height look nothing alike, so
-   these are matched by eye for equal weight, not by number. Same reasoning as
-   the `h` values in TrustedBy.jsx. Drop `logo` to leave a card unbadged. */
+   the date. `logoH` is its height and is tuned PER LOGO on purpose — a wide
+   oval and a tall monogram set to the same height look nothing alike, so these
+   are matched by eye for equal weight, not by number. Same reasoning as the `h`
+   values in TrustedBy.jsx. Written as px-at-a-16px-root and divided by 16 at
+   the point of use, so the badge scales with the root font size like everything
+   else. Drop `logo` to leave a card unbadged. */
 const ROLES = [
   {
     org: "San Francisco Giants",
@@ -124,7 +126,7 @@ const ROLES = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="screen border-t border-[var(--line)] bg-[var(--paper)] py-[72px] md:py-20">
+    <section id="experience" className="screen border-t border-[var(--line)] bg-[var(--paper)] py-[4.5rem] md:py-20">
       <div className="shell w-full">
         {/* opaque section-coloured panel (incl. the kicker) so the plane + line
             vanish cleanly behind the title rather than showing around the glyphs */}
@@ -153,14 +155,14 @@ export default function Experience() {
                 rounded="0"
                 className="border-0 border-b border-[var(--line)]"
               />
-              <div className="p-3 sm:p-[18px]">
+              <div className="p-3 sm:p-[1.125rem]">
                 {/* date + org badge share a row: the logo sits opposite the date
                     in the same spot on every card, and the title below keeps the
                     card's full width instead of wrapping around a mark. The date
                     gets min-w-0 so a long range wraps rather than shoving the
                     logo out of the card. */}
                 <div className="mb-1.5 flex items-center justify-between gap-2 sm:mb-2 sm:gap-3">
-                  <p className="m-0 min-w-0 text-[9.5px] font-semibold uppercase tracking-[0.06em] text-[var(--ac)] sm:text-[11px]">{r.date}</p>
+                  <p className="m-0 min-w-0 text-[0.59375rem] font-semibold uppercase tracking-[0.06em] text-[var(--ac)] sm:text-[0.6875rem]">{r.date}</p>
                   {r.logo && (
                     /* decorative: the org name is right below in the h3, so an alt
                        here would just make a screen reader say it twice.
@@ -171,16 +173,16 @@ export default function Experience() {
                       src={r.logo}
                       alt=""
                       aria-hidden="true"
-                      style={{ "--logo-h": `${r.logoH}px` }}
-                      className="exp-logo w-auto max-w-[76px] shrink-0 object-contain"
+                      style={{ "--logo-h": `${r.logoH / 16}rem` }}
+                      className="exp-logo w-auto max-w-[4.75rem] shrink-0 object-contain"
                       loading="lazy"
                       draggable="false"
                     />
                   )}
                 </div>
-                <h3 className="display m-0 mb-1 text-[15px] leading-[1.1] text-[var(--ink)] sm:text-[21px]">{r.org}</h3>
-                <p className="mb-[7px] text-[10.5px] font-semibold text-[var(--muted)] sm:mb-[10px] sm:text-[12.5px]">{r.role}</p>
-                <p className="m-0 text-[11px] leading-[1.5] text-[var(--body)] sm:text-[13px] sm:leading-[1.55]">{r.desc}</p>
+                <h3 className="display m-0 mb-1 text-[0.9375rem] leading-[1.1] text-[var(--ink)] sm:text-[1.3125rem]">{r.org}</h3>
+                <p className="mb-[0.4375rem] text-[0.65625rem] font-semibold text-[var(--muted)] sm:mb-[0.625rem] sm:text-[0.78125rem]">{r.role}</p>
+                <p className="m-0 text-[0.6875rem] leading-[1.5] text-[var(--body)] sm:text-[0.8125rem] sm:leading-[1.55]">{r.desc}</p>
                 {r.portfolio && (
                   <a
                     href={r.portfolio}

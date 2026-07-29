@@ -19,20 +19,28 @@
   --line: #ded8c9;        /* hairlines */
   --line-strong: #cbc4b0; /* stronger dividers */
 
-  --shell: 1440px;
-  --edge: 40px;           /* screen-edge gutter — nav sits flush to this */
-  --nav-h: 76px;
+  /* rem, not px, so the fluid root font-size below scales the whole page.
+     At a 16px root these compute to 1440 / 40 / 76px exactly as before. */
+  --shell: 90rem;
+  --edge: 2.5rem;         /* screen-edge gutter — nav sits flush to this */
+  --nav-h: 4.75rem;
 
   --ac-tint: color-mix(in srgb, var(--ac) 10%, var(--paper));
   --ac-tint-border: color-mix(in srgb, var(--ac) 26%, var(--paper));
 }
 @media (max-width: 640px) {
-  :root { --edge: 20px; }
+  :root { --edge: 1.25rem; }
 }
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* 16px root at 1536px viewport, 24px at 2560px; unchanged below 1536px.
+     Every length in this project is rem, so the whole design scales with it.
+     rem for the min so a raised browser font-size preference still applies. */
+  font-size: clamp(1rem, 0.25rem + 0.78125vw, 1.5rem);
+}
 /* exactly the nav height: a full-screen section then lands flush under the
    sticky bar and its bottom edge meets the bottom of the viewport */
 section[id] { scroll-margin-top: var(--nav-h); }
@@ -60,7 +68,7 @@ body {
 }
 
 .kicker {
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -125,13 +133,13 @@ body {
   padding-bottom: 0.12em;
   transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.talent-float:hover .talent-mask { transform: translateY(-10px) scale(1.06); }
+.talent-float:hover .talent-mask { transform: translateY(-0.625rem) scale(1.06); }
 .talent { display: inline-block; }
 .js-reveal .talent { transform: translateY(110%); }
 .js-reveal .talent.in { transform: none; }
 @keyframes talentFloat {
   0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-4px); }
+  50%      { transform: translateY(-0.25rem); }
 }
 
 /* ============================================================
@@ -140,16 +148,16 @@ body {
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 16px;
+  gap: 0.625rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.01em;
-  border-radius: 2px;
-  padding: 18px 34px;
+  border-radius: 0.125rem;
+  padding: 1.125rem 2.125rem;
   transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease,
     border-color 0.18s ease, box-shadow 0.18s ease;
 }
-.btn:active { transform: translateY(1px); }
+.btn:active { transform: translateY(0.0625rem); }
 
 .btn-fill {
   color: var(--paper);
@@ -158,40 +166,40 @@ body {
 .btn-fill:hover {
   color: var(--paper);
   background: var(--ink);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px color-mix(in srgb, var(--ink) 26%, transparent);
+  transform: translateY(-0.125rem);
+  box-shadow: 0 0.5rem 1.25rem color-mix(in srgb, var(--ink) 26%, transparent);
 }
 
 .btn-outline {
   color: var(--ink);
   border: 2px solid var(--ink);
-  padding: 16px 32px;
+  padding: 1rem 2rem;
   background: transparent;
 }
 .btn-outline:hover {
   color: var(--paper);
   background: var(--ink);
-  transform: translateY(-2px);
+  transform: translateY(-0.125rem);
 }
 
 /* on the dark closing panel */
 .btn-outline-dark {
   color: var(--paper);
   border: 2px solid color-mix(in srgb, var(--paper) 40%, transparent);
-  padding: 13px 24px;
+  padding: 0.8125rem 1.5rem;
   background: transparent;
 }
 .btn-outline-dark:hover {
   color: var(--ink);
   background: var(--paper);
   border-color: var(--paper);
-  transform: translateY(-2px);
+  transform: translateY(-0.125rem);
 }
 
 /* ---- nav link: accent wipe underline ---- */
 .navlink {
   position: relative;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -202,7 +210,7 @@ body {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -5px;
+  bottom: -0.3125rem;
   height: 2px;
   width: 100%;
   background: var(--ac);
@@ -215,15 +223,15 @@ body {
 
 /* ---- accent chip + landing glow ---- */
 .chip {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--ac);
   background: var(--ac-tint);
   border: 1px solid var(--ac-tint-border);
-  border-radius: 2px;
-  padding: 8px 13px;
+  border-radius: 0.125rem;
+  padding: 0.5rem 0.8125rem;
 }
-.js-reveal .chip-glow { transform: translateX(-14px); }
+.js-reveal .chip-glow { transform: translateX(-0.875rem); }
 /* `backwards`, not `both`: a filled animation keeps applying its last keyframe
    forever and outranks any normal declaration, so `both` left every chip pinned
    to the 100% frame's zero box-shadow and the hover shadow below never showed.
@@ -232,7 +240,7 @@ body {
 .js-reveal .chip-glow.in { transform: none; animation: chipGlow 1s ease-out 0.15s backwards; }
 @keyframes chipGlow {
   0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ac) 40%, transparent); }
-  55%  { box-shadow: 0 0 16px 3px color-mix(in srgb, var(--ac) 26%, transparent); }
+  55%  { box-shadow: 0 0 1rem 0.1875rem color-mix(in srgb, var(--ac) 26%, transparent); }
   100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ac) 0%, transparent); }
 }
 
@@ -247,14 +255,14 @@ a.chip:hover,
 a.chip:focus-visible {
   background: color-mix(in srgb, var(--ac) 17%, var(--paper));
   border-color: var(--ac);
-  box-shadow: 0 6px 14px color-mix(in srgb, var(--ink) 16%, transparent);
+  box-shadow: 0 0.375rem 0.875rem color-mix(in srgb, var(--ink) 16%, transparent);
 }
 /* Over-qualified on purpose: `.js-reveal .chip-glow.in` pins transform:none at
    (0,3,0), which out-specifies a plain `a.chip:hover` and would eat the lift. */
 .js-reveal a.chip.in:hover,
 .js-reveal a.chip.in:focus-visible,
 a.chip:hover,
-a.chip:focus-visible { transform: translateY(-2px); }
+a.chip:focus-visible { transform: translateY(-0.125rem); }
 a.chip:focus-visible { outline: 2px solid var(--ac); outline-offset: 3px; }
 
 /* ============================================================
@@ -283,16 +291,16 @@ a.chip:focus-visible { outline: 2px solid var(--ac); outline-offset: 3px; }
 .marquee-group {
   display: flex;
   align-items: center;
-  gap: 72px;
-  padding-right: 72px;
+  gap: 4.5rem;
+  padding-right: 4.5rem;
   margin: 0;
   list-style: none;
 }
 .marquee-item {
   display: flex;
   align-items: center;
-  height: 56px;           /* the slot a logo occupies — tallest mark is 54px */
-  font-size: 17px;
+  height: 3.5rem;          /* the slot a logo occupies — tallest mark is 54px */
+  font-size: 1.0625rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   white-space: nowrap;
@@ -306,6 +314,14 @@ a.chip:focus-visible { outline: 2px solid var(--ac); outline-offset: 3px; }
   from { transform: translateX(0); }
   to   { transform: translateX(calc(-100% / var(--copies))); }
 }
+/* The track's width is content-driven, not viewport-driven, so on a wide screen
+   the logos cross the visible field noticeably faster. Stretch the cycle to keep
+   the apparent speed roughly where it sits on a laptop.
+   MUST stay above the reduced-motion block below — same specificity, so the
+   later `animation: none` has to win for users who opted out of motion. */
+@media (min-width: 1536px) {
+  .marquee-track { animation-duration: 52.5s; }
+}
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation: none; }
 }
@@ -314,13 +330,13 @@ a.chip:focus-visible { outline: 2px solid var(--ac); outline-offset: 3px; }
 .photo-slot {
   display: flex;
   align-items: flex-end;
-  padding: 12px;
+  padding: 0.75rem;
   background: linear-gradient(140deg, var(--panel), #ded9cc);
   border: 1px solid var(--line);
   overflow: hidden;
 }
 .photo-slot span {
-  font-size: 9px;
+  font-size: 0.5625rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -331,14 +347,14 @@ a.chip:focus-visible { outline: 2px solid var(--ac); outline-offset: 3px; }
 .exp-card {
   background: #fbfaf6;
   border: 1px solid var(--line);
-  border-radius: 3px;
+  border-radius: 0.1875rem;
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 .exp-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-0.25rem);
   border-color: var(--ac);
-  box-shadow: 0 14px 30px rgba(23, 21, 15, 0.1);
+  box-shadow: 0 0.875rem 1.875rem rgba(23, 21, 15, 0.1);
 }
 
 /* Org badge on an experience card. Height comes from --logo-h, set per card in
@@ -353,17 +369,17 @@ a.chip:focus-visible { outline: 2px solid var(--ac); outline-offset: 3px; }
 .btn-mini {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  margin-top: 12px;
-  padding: 6px 11px;
-  font-size: 10.5px;
+  gap: 0.375rem;
+  margin-top: 0.75rem;
+  padding: 0.375rem 0.6875rem;
+  font-size: 0.65625rem;
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--ac);
   background: var(--ac-tint);
   border: 1px solid var(--ac-tint-border);
-  border-radius: 2px;
+  border-radius: 0.125rem;
   transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease,
     border-color 0.18s ease;
 }
@@ -371,7 +387,7 @@ a.chip:focus-visible { outline: 2px solid var(--ac); outline-offset: 3px; }
   color: var(--paper);
   background: var(--ac);
   border-color: var(--ac);
-  transform: translateY(-1px);
+  transform: translateY(-0.0625rem);
 }
 .btn-mini:focus-visible { outline: 2px solid var(--ac); outline-offset: 2px; }
 
@@ -380,22 +396,22 @@ a.chip:focus-visible { outline: 2px solid var(--ac); outline-offset: 3px; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  padding: 18px 0;
+  gap: 1.25rem;
+  padding: 1.125rem 0;
   border-bottom: 1px solid color-mix(in srgb, var(--paper) 22%, transparent);
   color: var(--paper);
   transition: color 0.2s ease, border-color 0.2s ease, padding 0.2s ease;
 }
 .arrow-link:hover { color: var(--ac); border-color: var(--ac); }
 .arrow-link .arrow { transition: transform 0.25s ease; flex-shrink: 0; }
-.arrow-link:hover .arrow { transform: translate(4px, -4px); }
+.arrow-link:hover .arrow { transform: translate(0.25rem, -0.25rem); }
 
 /* ============================================================
    Scroll reveal
    ============================================================ */
 .js-reveal .reveal {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(1.125rem);
   transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }

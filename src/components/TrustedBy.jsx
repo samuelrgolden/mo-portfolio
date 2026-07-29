@@ -20,8 +20,8 @@ function Group({ hidden = false }) {
           <img
             src={o.src}
             alt={hidden ? "" : o.name}
-            style={{ height: `${o.h}px` }}
-            className="w-auto max-w-[190px] object-contain"
+            style={{ height: `${o.h / 16}rem` }}
+            className="w-auto max-w-[11.875rem] object-contain"
             loading="lazy"
             draggable="false"
           />

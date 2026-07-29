@@ -49,7 +49,7 @@ export default function Hero() {
             </h1>
 
             <p
-              className="display m-0 mt-[30px]"
+              className="display m-0 mt-[1.875rem]"
               style={{ fontSize: "clamp(1.4rem,5.6vw,6.4rem)" }}
             >
               {TALENTS.map((t, i) => (
@@ -73,7 +73,7 @@ export default function Hero() {
 
             <p
               className="reveal m-0 mt-8 leading-[1.6] text-[var(--body)]"
-              style={{ fontSize: "clamp(15px,1.35vw,19px)", transitionDelay: "820ms" }}
+              style={{ fontSize: "clamp(0.9375rem,1.35vw,1.1875rem)", transitionDelay: "820ms" }}
             >
               Santa Clara marketing grad, starting in sales with Insight Global this August.
               Five years of fan engagement for the Giants, the 49ers, and Santa Clara
@@ -97,14 +97,14 @@ export default function Hero() {
 
         {/* ---- right third: the photo card ---- */}
         <div
-          className="reveal flex flex-col self-start rounded-2xl border border-[var(--line)] bg-[#fbf9f3] p-3 shadow-[0_2px_18px_rgba(23,21,15,0.05)]"
+          className="reveal flex flex-col self-start rounded-2xl border border-[var(--line)] bg-[#fbf9f3] p-3 shadow-[0_0.125rem_1.125rem_rgba(23,21,15,0.05)]"
           style={{ transitionDelay: "160ms" }}
         >
           <PhotoSlot
             src="/m1.webp"
             alt="Maurice Lichaa at his Santa Clara University graduation"
             ratio="1 / 1"
-            rounded="12px"
+            rounded="0.75rem"
             className="bg-[var(--panel)]"
           />
           <dl className="m-0 px-1 pt-3">
@@ -113,8 +113,8 @@ export default function Hero() {
                 key={row.label}
                 className={`flex items-baseline justify-between gap-3 py-2 ${i < CARD.length - 1 ? "border-b border-[var(--line)]" : ""}`}
               >
-                <dt className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[var(--kicker)]">{row.label}</dt>
-                <dd className={`m-0 text-right text-[14px] font-semibold ${row.accent ? "text-[var(--ac)]" : "text-[var(--ink)]"}`}>
+                <dt className="text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-[var(--kicker)]">{row.label}</dt>
+                <dd className={`m-0 text-right text-[0.875rem] font-semibold ${row.accent ? "text-[var(--ac)]" : "text-[var(--ink)]"}`}>
                   {row.value}
                 </dd>
               </div>

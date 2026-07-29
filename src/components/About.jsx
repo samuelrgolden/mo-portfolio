@@ -30,7 +30,7 @@ export default function About() {
         {/* items-stretch: both columns share a top AND bottom edge, so the photo
             grows to finish level with the chips row. Column is wider than the
             copy needs, which pushes the text right. */}
-        <div className="grid w-full grid-cols-1 items-stretch gap-10 lg:grid-cols-[minmax(0,370px)_1fr] lg:gap-14">
+        <div className="grid w-full grid-cols-1 items-stretch gap-10 lg:grid-cols-[minmax(0,23.125rem)_1fr] lg:gap-14">
           {/* left: photo — fills the row height on desktop (bottom lands on the
               chips); keeps a 3/4 crop on mobile where the columns stack */}
           <div data-flight="about" className="reveal no-fade relative z-[20]">
@@ -38,7 +38,7 @@ export default function About() {
               src="/m3.webp"
               alt="Maurice Lichaa"
               ratio={null}
-              rounded="4px"
+              rounded="0.25rem"
               className="aspect-[3/4] bg-[var(--panel)] lg:aspect-auto lg:h-full"
             />
           </div>
@@ -57,8 +57,8 @@ export default function About() {
                 key={i}
                 className="reveal leading-[1.62] text-[var(--body)]"
                 style={{
-                  fontSize: "clamp(15px,1.15vw,17px)",
-                  margin: `0 0 ${i === PARAGRAPHS.length - 1 ? 22 : 14}px`,
+                  fontSize: "clamp(0.9375rem,1.15vw,1.0625rem)",
+                  margin: `0 0 ${(i === PARAGRAPHS.length - 1 ? 22 : 14) / 16}rem`,
                   transitionDelay: `${60 + i * 60}ms`,
                 }}
               >
@@ -75,7 +75,7 @@ export default function About() {
               </p>
             </blockquote>
 
-            <div className="flex flex-wrap gap-[10px]">
+            <div className="flex flex-wrap gap-[0.625rem]">
               {CHIPS.map((c, i) => (
                 <a
                   key={c.label}

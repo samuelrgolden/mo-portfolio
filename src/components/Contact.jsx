@@ -23,12 +23,12 @@ function Arrow() {
 
 export default function Contact() {
   return (
-    <section id="contact" className="screen flex flex-col justify-center bg-[var(--ink)] py-[76px] text-[var(--paper)] md:py-20">
-      <div className="shell grid w-full grid-cols-1 items-center gap-12 md:grid-cols-[360px_1fr] md:gap-20">
+    <section id="contact" className="screen flex flex-col justify-center bg-[var(--ink)] py-[4.75rem] text-[var(--paper)] md:py-20">
+      <div className="shell grid w-full grid-cols-1 items-center gap-12 md:grid-cols-[22.5rem_1fr] md:gap-20">
         {/* left: grad photo + LinkedIn */}
         <div className="reveal no-fade">
           <div data-flight="end" className="relative z-[20]">
-            <PhotoSlot src="/contact-grad.webp" alt="Maurice at his Santa Clara University graduation" ratio="4 / 5" rounded="4px" />
+            <PhotoSlot src="/contact-grad.webp" alt="Maurice at his Santa Clara University graduation" ratio="4 / 5" rounded="0.25rem" />
           </div>
           <a
             href={LINKEDIN}
@@ -46,7 +46,7 @@ export default function Contact() {
           <h2 className="reveal display m-0 leading-[0.98] text-[var(--paper)]" style={{ fontSize: "clamp(2.6rem,5.5vw,4.6rem)" }}>
             Let's talk.
           </h2>
-          <p className="reveal mt-5 max-w-[460px] text-[15.5px] leading-[1.6] text-[color-mix(in_srgb,var(--paper)_72%,transparent)]" style={{ transitionDelay: "80ms" }}>
+          <p className="reveal mt-5 max-w-[28.75rem] text-[0.96875rem] leading-[1.6] text-[color-mix(in_srgb,var(--paper)_72%,transparent)]" style={{ transitionDelay: "80ms" }}>
             Booking an event, filling a game-day spot, or just want to connect? I'd love to hear from you.
           </p>
 
@@ -60,8 +60,8 @@ export default function Contact() {
                 style={{ transitionDelay: `${120 + i * 90}ms` }}
               >
                 <span className="flex flex-col gap-0.5">
-                  <span className="text-[16px] font-semibold">{l.label}</span>
-                  <span className="text-[12.5px] text-[color-mix(in_srgb,var(--paper)_55%,transparent)]">{l.meta}</span>
+                  <span className="text-[1rem] font-semibold">{l.label}</span>
+                  <span className="text-[0.78125rem] text-[color-mix(in_srgb,var(--paper)_55%,transparent)]">{l.meta}</span>
                 </span>
                 <Arrow />
               </a>

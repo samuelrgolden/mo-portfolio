@@ -43,7 +43,7 @@ const FEATURED = [
 
 /* Auto-advancing cross-fade slideshow. Starts on photos[0], advances every
    `interval` ms, and holds still when the visitor prefers reduced motion. */
-function PhotoRotator({ photos, interval = 2500, ratio = "4 / 5", rounded = "2px" }) {
+function PhotoRotator({ photos, interval = 2500, ratio = "4 / 5", rounded = "0.125rem" }) {
   const [idx, setIdx] = useState(0);
   useEffect(() => {
     if (photos.length < 2) return;
@@ -73,16 +73,16 @@ function Caption({ title, meta }) {
   return (
     <div className="pt-3">
       <div className="mb-2 h-px w-full bg-[var(--line-strong)]" />
-      <h3 className="display m-0 mb-[3px] text-[19px] leading-[1.15] text-[var(--ink)]">{title}</h3>
-      <p className="m-0 text-[12.5px] font-medium text-[var(--muted)]">{meta}</p>
+      <h3 className="display m-0 mb-[0.1875rem] text-[1.1875rem] leading-[1.15] text-[var(--ink)]">{title}</h3>
+      <p className="m-0 text-[0.78125rem] font-medium text-[var(--muted)]">{meta}</p>
     </div>
   );
 }
 
 export default function Recognition() {
   return (
-    <section id="recognition" className="screen flex flex-col justify-center border-t border-[var(--line)] bg-[var(--panel)] py-[72px] md:py-20">
-      <div className="shell grid w-full grid-cols-1 gap-5 md:grid-cols-[minmax(0,380px)_1fr] md:gap-10">
+    <section id="recognition" className="screen flex flex-col justify-center border-t border-[var(--line)] bg-[var(--panel)] py-[4.5rem] md:py-20">
+      <div className="shell grid w-full grid-cols-1 gap-5 md:grid-cols-[minmax(0,23.75rem)_1fr] md:gap-10">
         {/* left: heading + tall card */}
         <div className="reveal no-fade relative z-[20]">
           {/* opaque panel (incl. the kicker) so the plane + line vanish cleanly
@@ -116,13 +116,13 @@ export default function Recognition() {
           {FEATURED.map((f, i) => (
             <div
               key={f.title}
-              className="reveal grid grid-cols-[1fr_minmax(0,104px)] overflow-hidden rounded-[10px] border border-[var(--line)] bg-white sm:grid-cols-[1fr_minmax(0,200px)]"
+              className="reveal grid grid-cols-[1fr_minmax(0,6.5rem)] overflow-hidden rounded-[0.625rem] border border-[var(--line)] bg-white sm:grid-cols-[1fr_minmax(0,12.5rem)]"
               style={{ transitionDelay: `${80 + i * 90}ms` }}
             >
               <div className="flex flex-col justify-center p-4 sm:p-6">
-                <h3 className="display m-0 mb-1 text-[17px] leading-[1.1] text-[var(--ink)] sm:text-[23px]">{f.title}</h3>
-                <p className="m-0 mb-1.5 text-[10px] font-semibold uppercase tracking-[0.06em] text-[var(--ac)] sm:mb-2 sm:text-[12px]">{f.meta}</p>
-                <p className="m-0 text-[11.5px] leading-[1.5] text-[var(--body)] sm:text-[13px] sm:leading-[1.55]">{f.blurb}</p>
+                <h3 className="display m-0 mb-1 text-[1.0625rem] leading-[1.1] text-[var(--ink)] sm:text-[1.4375rem]">{f.title}</h3>
+                <p className="m-0 mb-1.5 text-[0.625rem] font-semibold uppercase tracking-[0.06em] text-[var(--ac)] sm:mb-2 sm:text-[0.75rem]">{f.meta}</p>
+                <p className="m-0 text-[0.71875rem] leading-[1.5] text-[var(--body)] sm:text-[0.8125rem] sm:leading-[1.55]">{f.blurb}</p>
               </div>
               <PhotoSlot src={f.img} alt={f.alt || f.title} label="Pic" ratio="1 / 1" rounded="0" className="h-full border-0" />
             </div>

@@ -3,7 +3,7 @@
    no markup changes needed. */
 /* ratio={null} opts out of aspect-ratio sizing, so the slot can instead be
    flex-sized by its parent (used by the hero mosaic to fit the screen). */
-export default function PhotoSlot({ src, alt = "", label = "Photo", ratio = "4 / 5", className = "", rounded = "2px", style }) {
+export default function PhotoSlot({ src, alt = "", label = "Photo", ratio = "4 / 5", className = "", rounded = "0.125rem", style }) {
   const base = { ...(ratio ? { aspectRatio: ratio } : null), borderRadius: rounded, ...style };
 
   if (src) {
