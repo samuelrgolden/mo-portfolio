@@ -83,14 +83,14 @@ export default function Hero() {
 
           {/* CTAs — centered, pinned to the bottom so they line up with the card */}
           <div className="reveal flex flex-wrap justify-center gap-5 pt-10" style={{ transitionDelay: "900ms" }}>
-            <a href="#contact" data-flight="start" className="btn btn-fill relative z-[20]"><span>Contact<span className="dot">.</span></span></a>
+            <a href="#contact" data-flight="start" className="btn btn-fill relative z-[20]"><span>Contact</span></a>
             <a
               href="https://www.linkedin.com/in/maurice-mo-lichaa"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-outline"
             >
-              <span>Connect<span className="dot">.</span></span>
+              <span>Connect</span>
             </a>
           </div>
         </div>

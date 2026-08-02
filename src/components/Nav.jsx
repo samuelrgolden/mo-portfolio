@@ -40,7 +40,7 @@ export default function Nav() {
             rel="noopener noreferrer"
             className="hidden items-center rounded-[0.125rem] border-2 border-[var(--ink)] px-4 py-2 text-[0.8125rem] font-semibold uppercase tracking-[0.06em] text-[var(--ink)] transition-colors hover:bg-[var(--ink)] hover:text-[var(--paper)] md:inline-flex"
           >
-            Resume<span className="dot">.</span>
+            Resume
           </a>
 
           <button

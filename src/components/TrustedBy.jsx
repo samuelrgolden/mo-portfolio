@@ -2,6 +2,7 @@
    different aspect ratios, so a single height makes wide wordmarks (Giants,
    Gallo) dominate and tall marks (Santa Clara) disappear. Tune per logo. */
 const ORGS = [
+  { name: "Insight Global", src: "/logos/insight-global.png", h: 34 },
   { name: "San Francisco Giants", src: "/logos/giants.svg", h: 40 },
   { name: "San Francisco 49ers", src: "/logos/49ers.svg", h: 46 },
   { name: "Santa Clara Broncos", src: "/logos/santa-clara.svg", h: 52 },
