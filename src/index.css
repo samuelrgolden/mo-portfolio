@@ -31,6 +31,12 @@
 @media (max-width: 640px) {
   :root { --edge: 1.25rem; }
 }
+/* Half-height nav on phones. Every consumer reads the token — the bar itself,
+   `.screen`'s min-height, and section scroll-margin — so this one line shortens
+   the bar AND hands the extra height back to the hero. */
+@media (max-width: 47.9375rem) {
+  :root { --nav-h: 2.5rem; }
+}
 
 * { box-sizing: border-box; }
 
@@ -173,7 +179,7 @@ body {
      rather than pushing the buttons off the screen. */
   .hero-photo {
     order: -1;
-    width: min(78vw, 42svh);
+    width: min(86vw, 46svh);
     margin-inline: auto;
     padding: 0;
     border: 0;
@@ -188,15 +194,20 @@ body {
      that doesn't fit around a photo this size, and About re-tells it */
   .hero-lede { display: none; }
 
-  /* 18vw fills the gutters with Anton and still clears them in the
+  /* 19vw fills the gutters with Anton and still clears them in the
      fallback face — the font loads with `display=swap`, so a nowrap
      name at this size would scroll the page sideways for the length
-     of the swap. Wrapping is the safety valve; Anton never uses it. */
-  .hero-name    { font-size: clamp(2.4rem, 18vw, 11rem); white-space: normal; }
-  .hero-talents { font-size: clamp(1.4rem, 7.5vw, 6.4rem); margin-top: 0.75rem; }
-  /* no top pad, so `justify-between` splits the free space evenly above and
-     below the detail card; the bottom pad lifts the buttons off the fold */
-  .hero-cta     { padding-top: 0; padding-bottom: 0rem; }
+     of the swap. Wrapping is the safety valve; Anton never uses it.
+     Don't push much past this: at 20vw Anton itself starts touching
+     the gutter on a 320px screen. */
+  .hero-name    { font-size: clamp(2.4rem, 19vw, 11rem); white-space: normal; }
+  .hero-talents { font-size: clamp(1.4rem, 8vw, 6.4rem); margin-top: 0.5rem; }
+  /* No top pad, so `justify-between` splits the free space evenly above and
+     below the detail card. The bottom pad clears Chrome iOS's bottom toolbar,
+     which overlays the viewport even though `.screen` is measured in svh —
+     without it the buttons land under the bar. env() adds the notch inset on
+     phones that report one, and resolves to 0 everywhere else. */
+  .hero-cta     { padding-top: 0; padding-bottom: calc(1.75rem + env(safe-area-inset-bottom, 0px)); }
 }
 
 /* ============================================================

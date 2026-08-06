@@ -20,7 +20,7 @@ export default function Nav() {
     <header className="sticky top-0 z-40 border-b border-[var(--line)] bg-[color-mix(in_srgb,var(--paper)_88%,transparent)] backdrop-blur-[10px]">
       {/* edge-to-edge: logo hard left, links hard right */}
       <div className="edge flex h-[var(--nav-h)] items-center justify-between">
-        <a href="#top" className="display text-[1.625rem] leading-none tracking-[0.02em] text-[var(--ink)] transition-colors hover:text-[var(--ac)]">
+        <a href="#top" className="display text-[1.25rem] leading-none tracking-[0.02em] text-[var(--ink)] transition-colors hover:text-[var(--ac)] md:text-[1.625rem]">
           M<span className="text-[var(--ac)]">L.</span>
         </a>
 
@@ -48,7 +48,7 @@ export default function Nav() {
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="flex h-9 w-9 items-center justify-center text-[var(--ink)] md:hidden"
+            className="-mr-1 flex h-7 w-7 items-center justify-center text-[var(--ink)] md:hidden"
           >
             <span className="relative block h-[0.875rem] w-[1.25rem]">
               <span className={`absolute left-0 h-[0.125rem] w-full bg-current transition-all duration-300 ${open ? "top-[0.375rem] rotate-45" : "top-0"}`} />

@@ -38,12 +38,12 @@ function CardRows() {
 
 export default function Hero() {
   return (
-    <section id="top" className="screen flex flex-col justify-start pb-8 pt-4 md:pb-20 md:pt-8">
+    <section id="top" className="screen flex flex-col justify-start pb-8 pt-1 md:pb-20 md:pt-8">
       {/* Masthead frame — mirrors Lily: a kicker row bracketed by solid hairlines that
           run full-bleed to the screen edges, while the labels sit at the nav gutter.
           The relocation line now lives in the centre. */}
       <div className="h-px w-full bg-[var(--line-strong)]" />
-      <div className="edge relative flex items-center justify-between gap-4 py-2.5 md:py-3.5">
+      <div className="edge relative flex items-center justify-between gap-4 py-1.5 md:py-3.5">
         <span className="kicker !text-[var(--ink)]">Maurice &ldquo;Mo&rdquo; Lichaa</span>
         <span className="kicker absolute left-1/2 hidden -translate-x-1/2 whitespace-nowrap !tracking-[0.4em] md:block">
           San Francisco <span className="text-[var(--gold-ink)]">&rarr;</span> San Diego
@@ -100,7 +100,7 @@ export default function Hero() {
               Same rows, same chrome, same width as the photo above it. */}
           {/* type steps down from the desktop card's — the rows are the same
               content at a smaller scale, so the card takes less of the screen */}
-          <dl className="reveal my-2 w-[min(78vw,42svh)] self-center rounded-none border border-[var(--line)] bg-[#fbf9f3] px-3.5 py-0.5 shadow-[0_0.125rem_1.125rem_rgba(23,21,15,0.05)] [&>div]:py-1 [&_dd]:text-[0.65625rem] [&_dt]:text-[0.5rem] [&_dt]:tracking-[0.12em] md:hidden" style={{ transitionDelay: "860ms" }}>
+          <dl className="reveal my-1 w-[min(86vw,46svh)] self-center rounded-none border border-[var(--line)] bg-[#fbf9f3] px-3.5 py-0 shadow-[0_0.125rem_1.125rem_rgba(23,21,15,0.05)] [&>div]:py-[0.1875rem] [&_dd]:text-[0.65625rem] [&_dt]:text-[0.5rem] [&_dt]:tracking-[0.12em] md:hidden" style={{ transitionDelay: "860ms" }}>
             <CardRows />
           </dl>
 
