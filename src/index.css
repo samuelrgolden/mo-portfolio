@@ -143,6 +143,63 @@ body {
 }
 
 /* ============================================================
+   Hero sizing — one place, so the phone layout can restack without
+   touching the desktop markup.
+
+   These three rules ARE the desktop sizes (they were inline styles
+   before); the media query below is the only thing that changes,
+   and it stops at Tailwind's `md` (48rem), so nothing here reaches
+   the two-column poster layout.
+
+   Phone: bare centred photo first, then the name at full width, the
+   talents under it, and the CTAs still above the fold. Written as
+   plain CSS rather than `md:` utility pairs because half of it
+   (border/padding/shadow off, order, white-space) fights Tailwind's
+   own utilities, where class order does not decide the winner.
+   ============================================================ */
+.hero-name    { font-size: clamp(2.4rem, 9.5vw, 11rem); }
+.hero-talents { font-size: clamp(1.4rem, 5.6vw, 6.4rem); }
+.hero-lede    { font-size: clamp(0.9375rem, 1.35vw, 1.1875rem); }
+
+@media (max-width: 47.9375rem) {
+  /* Fill the hero's screen and give the second row the slack, so the CTAs
+     sit on the bottom edge of the first screen and stay put — the photo
+     growing pushes the name and talents DOWN toward them rather than
+     dragging the buttons around. */
+  .hero-grid { flex: 1 1 auto; grid-template-rows: auto 1fr; }
+
+  /* the photo leads, uncarded and centred, at roughly the width the name
+     sets below it. Capped in svh too, so a short phone shrinks the photo
+     rather than pushing the buttons off the screen. */
+  .hero-photo {
+    order: -1;
+    width: min(78vw, 42svh);
+    margin-inline: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  /* the caption rows are part of the card, so they go with it */
+  .hero-photo dl { display: none; }
+
+  .hero-copy { margin-top: 0; text-align: center; }
+  /* phone hero is photo → name → talents → CTAs; the lede is the one thing
+     that doesn't fit around a photo this size, and About re-tells it */
+  .hero-lede { display: none; }
+
+  /* 18vw fills the gutters with Anton and still clears them in the
+     fallback face — the font loads with `display=swap`, so a nowrap
+     name at this size would scroll the page sideways for the length
+     of the swap. Wrapping is the safety valve; Anton never uses it. */
+  .hero-name    { font-size: clamp(2.4rem, 18vw, 11rem); white-space: normal; }
+  .hero-talents { font-size: clamp(1.4rem, 7.5vw, 6.4rem); margin-top: 0.75rem; }
+  /* no top pad, so `justify-between` splits the free space evenly above and
+     below the detail card; the bottom pad lifts the buttons off the fold */
+  .hero-cta     { padding-top: 0; padding-bottom: 0rem; }
+}
+
+/* ============================================================
    Buttons — squared, confident, poster-like
    ============================================================ */
 .btn {
@@ -153,7 +210,7 @@ body {
   font-weight: 700;
   letter-spacing: 0.01em;
   border-radius: 0.125rem;
-  padding: 1.125rem 2.125rem;
+  padding: 1.1rem 2.125rem;
   transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease,
     border-color 0.18s ease, box-shadow 0.18s ease;
 }

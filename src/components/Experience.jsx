@@ -307,8 +307,11 @@ export default function Experience() {
             </div>
           </article>
 
-          {/* i=3 so its reveal delay matches the other fourth-column cards */}
-          <div className="lg:-mt-50"><RoleCard r={LAST} i={3} /></div>
+          {/* i=3 so its reveal delay matches the other fourth-column cards.
+              Hidden below lg: the card only has a home in the four-column
+              bottom row: in the two-column stack it lands as a lone half-width
+              card under Professionally, which is the thing worth cutting. */}
+          <div className="hidden lg:-mt-50 lg:block"><RoleCard r={LAST} i={3} /></div>
         </div>
       </div>
     </section>
