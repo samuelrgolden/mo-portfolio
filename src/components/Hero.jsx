@@ -42,8 +42,11 @@ export default function Hero() {
       {/* Masthead frame — mirrors Lily: a kicker row bracketed by solid hairlines that
           run full-bleed to the screen edges, while the labels sit at the nav gutter.
           The relocation line now lives in the centre. */}
-      <div className="h-px w-full bg-[var(--line-strong)]" />
-      <div className="edge relative flex items-center justify-between gap-4 py-1.5 md:py-3.5">
+      {/* Phones drop the masthead entirely — the name is already the largest
+          thing on the screen a few rem below, so the rule + kicker row were
+          repeating it in miniature. */}
+      <div className="hidden h-px w-full bg-[var(--line-strong)] md:block" />
+      <div className="edge relative hidden items-center justify-between gap-4 py-1.5 md:flex md:py-3.5">
         <span className="kicker !text-[var(--ink)]">Maurice &ldquo;Mo&rdquo; Lichaa</span>
         <span className="kicker absolute left-1/2 hidden -translate-x-1/2 whitespace-nowrap !tracking-[0.4em] md:block">
           San Francisco <span className="text-[var(--gold-ink)]">&rarr;</span> San Diego
@@ -56,7 +59,7 @@ export default function Hero() {
           `hero-*` classes in index.css own that and stop at the md breakpoint. */}
       <div className="hero-grid edge mt-2 grid grid-cols-1 items-stretch gap-6 md:gap-10 lg:grid-cols-[2fr_1fr] lg:gap-12">
         {/* ---- left two-thirds: copy at top, CTAs pinned to the bottom ---- */}
-        <div className="flex flex-col justify-between">
+        <div className="hero-left flex flex-col justify-between">
           {/* copy block shifted down 40px: text 1's bottom lands at text 2's old top,
               text 2 + 3 follow by the same amount so their spacing is unchanged */}
           <div className="hero-copy mt-10">
@@ -93,16 +96,6 @@ export default function Hero() {
               Athletics. Eight years hosting and behind the decks with Gatsby event studios, recently partnered with Dancing Dj Productions.
             </p>
           </div>
-
-          {/* Phones only: the caption rows detach from the photo card (which sheds
-              its frame there) and stand as their own card, filling the gap
-              `justify-between` opens up between the talents line and the CTAs.
-              Same rows, same chrome, same width as the photo above it. */}
-          {/* type steps down from the desktop card's — the rows are the same
-              content at a smaller scale, so the card takes less of the screen */}
-          <dl className="reveal my-1 w-[min(86vw,46svh)] self-center rounded-none border border-[var(--line)] bg-[#fbf9f3] px-3.5 py-0 shadow-[0_0.125rem_1.125rem_rgba(23,21,15,0.05)] [&>div]:py-[0.1875rem] [&_dd]:text-[0.65625rem] [&_dt]:text-[0.5rem] [&_dt]:tracking-[0.12em] md:hidden" style={{ transitionDelay: "860ms" }}>
-            <CardRows />
-          </dl>
 
           {/* CTAs — centered, pinned to the bottom so they line up with the card */}
           <div className="reveal hero-cta flex flex-wrap justify-center gap-5 pt-10" style={{ transitionDelay: "900ms" }}>

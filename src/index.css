@@ -189,7 +189,14 @@ body {
   /* the caption rows are part of the card, so they go with it */
   .hero-photo dl { display: none; }
 
-  .hero-copy { margin-top: 0; text-align: center; }
+  /* `display: contents` dissolves the copy wrapper so the name, the talents and
+     the CTA row become direct flex items of the column — that's what lets
+     `space-evenly` spread the three of them across the space the photo leaves,
+     instead of `justify-between` pinning one grouped block to the top and the
+     buttons to the bottom. Centring moves up to the column since the wrapper no
+     longer generates a box to carry it. */
+  .hero-left { justify-content: space-evenly; text-align: center; }
+  .hero-copy { display: contents; }
   /* phone hero is photo → name → talents → CTAs; the lede is the one thing
      that doesn't fit around a photo this size, and About re-tells it */
   .hero-lede { display: none; }
